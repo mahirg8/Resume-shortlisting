@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, redirect, url_for
 import os
 import docx2txt
 import pdfplumber
@@ -44,6 +44,14 @@ def extract_text(file_path):
         return ""
 
 @app.route("/")
+def home():
+    return redirect(url_for('index'))
+
+@app.route("/index")
+def index():
+    return render_template('index.html')
+
+@app.route("/matchresume")
 def matchresume():
     return render_template('matchresume.html')
 
